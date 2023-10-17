@@ -1,0 +1,6 @@
+We want to create a messages module such that 
+it shoulkd have the following:
+1)Pipe:Validates request data before it reaches a route handler
+2)Messages Controller:route the request to a particular function
+3)Messages Service:Run some business logic
+4)Messages Repository:Access a database
