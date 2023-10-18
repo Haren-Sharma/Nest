@@ -15,6 +15,7 @@ import {
 import { UserDto } from './dtos/create-user.dto';
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
+import { userdto } from './dtos/user.dto';
 
 @Controller('auth')
 export class UsersController {
@@ -25,11 +26,11 @@ export class UsersController {
     this.userService.create(body.email, body.password);
   }
 
-//   @UseInterceptors(ClassSerializerInterceptor)
-  @UseInterceptors(SerializeInterceptor)
+  //   @UseInterceptors(ClassSerializerInterceptor)
+  @UseInterceptors(new SerializeInterceptor(userdto))
   @Get('/:id')
   async findUser(@Param('id', ParseIntPipe) id: number) {
-    console.log('handler is running')
+    console.log('handler is running');
     const user = await this.userService.findOne(id);
     if (!user) {
       throw new NotFoundException('User doesnot exist');
