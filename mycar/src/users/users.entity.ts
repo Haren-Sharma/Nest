@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+// import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -21,8 +21,10 @@ export class User {
   @Column()
   email: string;
 
-  @Exclude() /*userentity instance converted to plain object converted to json then it will exclude password
+  // @Exclude() 
+  /*userentity instance converted to plain object converted to json then it will exclude password
   these are simply the rules,that the interceptor will follow*/
+  //but a better approach is to use custom interceptors
   @Column()
   password: string;
 
