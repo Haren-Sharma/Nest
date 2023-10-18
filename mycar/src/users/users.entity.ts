@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, AfterInsert } from 'typeorm';
 //create an entity file,and create a class in it that lists all the properties that your entity will have
 // and then follow the next 2 steps
 //step1
@@ -9,8 +9,15 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Column()
   email: string;
+
   @Column()
   password: string;
+
+  @AfterInsert()
+  logInsert() {
+    console.log('Inserted user with id ', this.id);
+  }
 }
