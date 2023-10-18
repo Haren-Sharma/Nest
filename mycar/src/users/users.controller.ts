@@ -13,7 +13,10 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UserDto } from './dtos/create-user.dto';
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+import {
+  Serialize,
+  SerializeInterceptor,
+} from 'src/interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
 import { userdto } from './dtos/user.dto';
 
@@ -27,7 +30,8 @@ export class UsersController {
   }
 
   //   @UseInterceptors(ClassSerializerInterceptor)
-  @UseInterceptors(new SerializeInterceptor(userdto))
+  //   @UseInterceptors(new SerializeInterceptor(userdto))
+  @Serialize(userdto) //cutom decorator //decorator is nothing but a function
   @Get('/:id')
   async findUser(@Param('id', ParseIntPipe) id: number) {
     console.log('handler is running');
