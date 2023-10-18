@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, AfterInsert } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  AfterInsert,
+  AfterUpdate,
+  AfterRemove,
+} from 'typeorm';
 //create an entity file,and create a class in it that lists all the properties that your entity will have
 // and then follow the next 2 steps
 //step1
@@ -19,5 +26,15 @@ export class User {
   @AfterInsert()
   logInsert() {
     console.log('Inserted user with id ', this.id);
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log('Updated user with id ', this.id);
+  }
+
+  @AfterRemove()
+  logDelete() {
+    console.log('Deleted the user with id ', this.id);
   }
 }
