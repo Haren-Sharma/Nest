@@ -9,11 +9,15 @@ import { Observable, map } from 'rxjs';
 import { plainToInstance } from 'class-transformer';
 // import { userdto } from 'src/users/dtos/user.dto';
 
-export function Serialize(dto: any) {
+interface ClassConstructor {
+  new (...args: any[]): {};
+}
+
+export function Serialize(dto: ClassConstructor) {
   return UseInterceptors(new SerializeInterceptor(dto));
 }
 export class SerializeInterceptor implements NestInterceptor {
-  constructor(private dto: any) {}
+  constructor(private dto: ClassConstructor) {}
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,

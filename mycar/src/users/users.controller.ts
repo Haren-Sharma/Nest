@@ -21,6 +21,7 @@ import { UsersService } from './users.service';
 import { userdto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(userdto) //controller wide serialization
 export class UsersController {
   constructor(private userService: UsersService) {}
 
@@ -31,7 +32,7 @@ export class UsersController {
 
   //   @UseInterceptors(ClassSerializerInterceptor)
   //   @UseInterceptors(new SerializeInterceptor(userdto))
-  @Serialize(userdto) //cutom decorator //decorator is nothing but a function
+  //   @Serialize(userdto) //cutom decorator //decorator is nothing but a function
   @Get('/:id')
   async findUser(@Param('id', ParseIntPipe) id: number) {
     console.log('handler is running');
